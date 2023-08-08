@@ -1,4 +1,4 @@
-const storiesJson = require('../stories.json');
+
 const storyController = {
     story: function(request, response) {
          const idStory = request.params.id;
