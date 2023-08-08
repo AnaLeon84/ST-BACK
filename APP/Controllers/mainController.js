@@ -1,10 +1,16 @@
+// Un controller est un objet qui regroupe les méthodes
+// permettant de traiter les différentes requêtes
+// prévues dans notre application
 const mainController = {
-    home: function(request, response) {
-        response.render('index');
+    home: (req, res) => {
+  
+      console.log(req.session);
+      res.render('main/home');
+  
     },
-    login: function(request, response) {
-        response.render('login');
-    }
-};
-
-module.exports = mainController;
+    notFound: (req, res) => {
+      res.status(404).render('main/notFound');
+    },
+  };
+  
+  module.exports = mainController;

@@ -16,3 +16,18 @@ const sequelize = new Sequelize(process.env.PG_URL, {
 //j'exporte le fichier pour le rendre accessible
 module.exports = sequelize;
 
+
+// version julien
+// on se connecte à la BDD
+//const { Client } = require('pg');
+
+//const connectionString = process.env.PG_CONNECTION_STRING;
+
+//const client = new Client({
+  //connectionString,
+//});
+
+//client.connect();
+
+// on met à disposition du reste de l'application le client connecté
+//module.exports = client;
