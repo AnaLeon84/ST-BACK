@@ -3,8 +3,8 @@ const superController = require('../controllers/superController');
 
 const router = express.Router();
 router.get('/stories', superController.getAllStories);    //Récupérer toutes les histoires publiques 
-/*router.get('/stories/:id', mainController);  // Récupérer une histoire spécifique 
-router.post('/stories', mainController);   //Créer une nouvelle histoire 
+router.get('/stories/:id', superController.getOneStory);  // Récupérer une histoire spécifique 
+/*router.post('/stories', mainController);   //Créer une nouvelle histoire 
 router.put('/stories/:id', mainController); // Mettre à jour une histoire existante 
 router.delete('/stories/:id', mainController);// Supprimer une histoire 
 

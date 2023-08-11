@@ -11,6 +11,13 @@ const superController = {
     const result = await dataMapper.getAllPublicStories();
     res.json(result); //pour renvoyer le résultat en format json
  },
+
+async getOneStory(req, res) {
+const { id } = req.params;
+const oneStory = await dataMapper.getOneSingleStory(id);
+res.json(oneStory); //pour renvoyer le résultat en format json
+
+}
 };
 
 
