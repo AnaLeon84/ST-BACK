@@ -63,12 +63,21 @@ const dataMapper = {
         return result.rows;
     },
 
-    async getOneSingleUser(id) {
-        const preparedQuery = 'SELECT * FROM "user" WHERE id = $1';
-        const values = [`${id}`];
+    //TODO: corriger
+    async addUser(user) {
+        try{
+        const preparedQuery = `INSERT INTO "user" ("name","email", 
+        "password", "description") VALUES ($1, $2, $3, $4) RETURNING *`;
+        const values = [user.name, user.email, user.password, user.description];
         const result = await client.query(preparedQuery, values);
         return result.rows[0];
-    },
+
+    }   catch (error) {
+        console.error('Erreur pour créer un nouvel utilisateur', error);
+        throw error; // relance l'erreur pour le gèrer dans le controller ou dans un middleware dedié à la gestion d'erreurs
+    }
+}
+
 };
 
     
