@@ -108,8 +108,22 @@ const dataMapper = {
         const values = [`${id}`];
         const result = await client.query(preparedQuery, values);
         return (result.rowCount === 1);
-    }
+    },
 
+    //--------------------------Récup les stories d'un user--------------------------------------
+
+    async getUserStories(userId) {
+
+        const preparedQuery = `
+            SELECT * FROM "story"
+            WHERE "user_id" = $1`;
+
+        const values = [userId];
+
+        const result = await client.query(preparedQuery, values);
+
+        return result.rows;
+    }
 
 };
 

@@ -57,8 +57,29 @@ const userController = {
         const { id } = req.params;
         await dataMapper.deleteOneUser(id);
         res.send('Votre compte vient d\'être supprimé');
-    }
+    },
 
+    //----------------------------Recuperer histoires de l'user connecté----------------------------
+
+    //TODO: serveur ok mais requete invalide "vous n'êtes pas autorisé à accèder..."
+    async getAllUserStories(req, res, next) {
+        try{
+            const userId = req.params.id;
+
+            if (req.user && req.user.id === userId) {
+                const stories = await dataMapper.getUserStories(userId);
+                return res.json(stories);
+            } else {
+                return res.status(403).json({ error: 'Vous n\'êtes pas autorisé à accéder à cette ressource'});
+                }  
+            } catch (err) {
+                console.error('Erreur pour accèder aux histoires de l\'utilisateur', err);
+                return res.status(500).json({ error: 'Erreur du serveur interne' });
+            }
+    
+         },
+        
+    
 };
 
 

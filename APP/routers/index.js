@@ -21,7 +21,7 @@ router.get('/users/:id', userController.getOneUser); //Récupérer un utilisateu
 
 
 router.delete('/users/:id', userController.deleteUser); //Supprimer un user
-/*router.get('/user/:id/my-story', userController.getAllUserStories);  //Récupérer toutes les histoires de l'utilisateur connecté 
+router.get('/users/:id/my-story', userController.getAllUserStories);  //Récupérer toutes les histoires de l'utilisateur connecté 
 /*router.post('/user/:id/favorite', mainController); // Ajouter une histoire à la liste de favoris de l'utilisateur connecté 
 router.get('/user/:id/favorite', mainController); //Récupérer la liste des histoires favorites de l'utilisateur connecté 
 router.delete('/user/:id/favorite/:id', mainController); //Supprimer une histoire de la liste de favoris de l'utilisateur connecté 
