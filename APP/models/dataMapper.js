@@ -21,7 +21,7 @@ const dataMapper = {
         const result = await client.query(preparedQuery, values);
         return result.rows[0];
     },
-    
+ 
     async updateOneSingleStory(story) {
         const preparedQuery = `
             UPDATE "story"
@@ -64,7 +64,7 @@ const dataMapper = {
     },
 
     //TODO: corriger
-    async addUser(user) {
+    /*async addUser(user) {
         try{
         const preparedQuery = `INSERT INTO "user" ("name","email", 
         "password", "description") VALUES ($1, $2, $3, $4) RETURNING *`;
@@ -76,7 +76,40 @@ const dataMapper = {
         console.error('Erreur pour créer un nouvel utilisateur', error);
         throw error; // relance l'erreur pour le gèrer dans le controller ou dans un middleware dedié à la gestion d'erreurs
     }
-}
+},*/
+    //TODO: corriger    
+   /* async updateOneSingleUser(user) { 
+
+        const preparedQuery = `
+            UPDATE "user"
+            SET 
+            "name" = $1, 
+            "email" = $2, 
+            "password" = $3, 
+            "description" = $4,
+            "updated_at" = NOW()
+            WHERE "id" = $5 RETURNING *`;
+
+        const values = [
+            user.name,
+            user.email,
+            user.password,
+            user.description,
+            user.id,
+        ];
+        
+        const result = await client.query(preparedQuery, values);
+
+        return result.rows[0];
+    },*/
+
+    async deleteOneUser(id) {
+        const preparedQuery = 'DELETE FROM "user" WHERE "id" = $1';
+        const values = [`${id}`];
+        const result = await client.query(preparedQuery, values);
+        return (result.rowCount === 1);
+    }
+
 
 };
 
