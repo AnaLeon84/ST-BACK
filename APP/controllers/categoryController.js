@@ -13,7 +13,16 @@ const categoryController = {
         res.json(oneCategory);
     },
 
-
+    async postOneCategory(req, res) {
+        try{
+            const newCategory = req.body; //récupérer la catégorie depuis le corps de la requête
+            const result = await dataMapper.addCategory(newCategory);
+            res.json(result);
+        } catch (error){
+            console.error('Erreur pour créer une nouvelle catégorie', error);
+            res.status(500).json({ erreur:'Requête invalide'});
+        }
+    }
 
 };
 

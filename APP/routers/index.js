@@ -31,6 +31,6 @@ router.put('/user/:id/profil', mainController); // Mettre à jour le compte de l
 //CATEGORY
 router.get('/categories', categoryController.getAllCategories); //Récupérer toutes les catégories*/
 router.get('/categories/:id', categoryController.getOneCategory);// Récupérer une catégorie
-
+router.post('/categories', categoryController.postOneCategory); // Créer une nouvelle catégorie
 
 module.exports = router;

@@ -144,6 +144,14 @@ const dataMapper = {
         return result.rows[0];
 
     },
+    
+    async addCategory(category) {
+        const preparedQuery = `INSERT INTO "category" ("name") VALUES ($1) RETURNING *`;
+        const values = [category.name];
+        const result = await client.query(preparedQuery, values);
+        return result.rows[0];
+
+    },
 };
 
     
