@@ -32,26 +32,16 @@ const userController = {
         }
     },
 
-    //TODO: corriger
-    /*async updateOneUser(req, res) {
-        try {
-            const { id } = req.params;
-            const user = req.body;
     
-            const updatedUser = await dataMapper.updateOneSingleUser({ ...user, id });
+    async updateOneUser(req, res) {
+        const { id } = req.params;
+        const user = req.body;
     
-            // Verifier si l'user a bien été modifié
+        const updatedUser = await dataMapper.updateOneSingleUser({ ...user, id });
 
-            if (updatedUser) {
-                return res.status(200).json(updatedUser);
-            } else {
-                return res.status(404).json({ message: 'Utilisateur non trouvé ou non actualisé' });
-            }
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: 'Requête invalide' });
-        }
-    },*/
+        res.json(updatedUser);
+    
+    },
 
     async deleteUser(req,res) {
         const { id } = req.params;

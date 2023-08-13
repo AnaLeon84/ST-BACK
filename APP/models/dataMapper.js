@@ -79,8 +79,8 @@ const dataMapper = {
         return result.rows[0];
     },
     
-    //TODO: corriger    
-   /* async updateOneSingleUser(user) { 
+   
+    async updateOneSingleUser(user) { 
 
         const preparedQuery = `
             UPDATE "user"
@@ -103,7 +103,7 @@ const dataMapper = {
         const result = await client.query(preparedQuery, values);
 
         return result.rows[0];
-    },*/
+    },
 
     async deleteOneUser(id) {
         const preparedQuery = 'DELETE FROM "user" WHERE "id" = $1';

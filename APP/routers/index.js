@@ -18,8 +18,7 @@ router.get('/users/:id', userController.getOneUser); //Récupérer un utilisateu
 
 router.post('/users', userController.postOneUser); //Créer un nouveau utilisateur
 
-//TODO: corriger
-//router.put('/users/:id', userController.updateOneUSer); //mettre à jour un user
+router.put('/users/:id', userController.updateOneUser); //mettre à jour un user
 
 
 router.delete('/users/:id', userController.deleteUser); //Supprimer un user
