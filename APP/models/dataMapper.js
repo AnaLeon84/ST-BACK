@@ -114,13 +114,13 @@ const dataMapper = {
 
     //--------------------------Récup les stories d'un user--------------------------------------
 
-    async getUserStories(userId) {
+    async getUserStories(id) {
 
         const preparedQuery = `
             SELECT * FROM "story"
             WHERE "user_id" = $1`;
 
-        const values = [userId];
+        const values = [`${id}`];
 
         const result = await client.query(preparedQuery, values);
 

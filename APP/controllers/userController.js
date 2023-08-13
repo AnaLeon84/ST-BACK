@@ -52,7 +52,14 @@ const userController = {
     //----------------------------Recuperer histoires de l'user connecté----------------------------
 
     //TODO: serveur ok mais requete invalide "vous n'êtes pas autorisé à accèder..."
-    async getAllUserStories(req, res, next) {
+
+    async getAllUserStories(req, res) {
+        const { id } = req.params;
+        const oneUser = await dataMapper.getUserStories(id);
+        res.json(oneUser);
+    },
+
+    /*async getAllUserStories(req, res) {
         try{
             const userId = req.params.id;
 
@@ -67,7 +74,7 @@ const userController = {
                 return res.status(500).json({ error: 'Erreur du serveur interne' });
             }
     
-         },
+    },*/
         
     
 };

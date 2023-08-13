@@ -32,6 +32,8 @@ const categoryController = {
         res.json(updateCategory);
     
     },
+
+    
 };
 
 module.exports = categoryController;

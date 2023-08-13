@@ -15,9 +15,7 @@ router.delete('/stories/:id', storyController.deleteStory);// Supprimer une hist
 //USER
 router.get('/users', userController.getAllUsers); //Récupérer tous les utilisateurs
 router.get('/users/:id', userController.getOneUser); //Récupérer un utilisateur
-
 router.post('/users', userController.postOneUser); //Créer un nouveau utilisateur
-
 router.put('/users/:id', userController.updateOneUser); //mettre à jour un user
 
 
