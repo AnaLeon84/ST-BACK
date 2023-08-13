@@ -22,8 +22,16 @@ const categoryController = {
             console.error('Erreur pour créer une nouvelle catégorie', error);
             res.status(500).json({ erreur:'Requête invalide'});
         }
-    }
+    },
 
+
+    async updateOneCategory(req, res) {
+        const { id } = req.params;
+        const category = req.body;
+        const updateCategory = await dataMapper.updateOneSingleCategory({ ...category, id  });
+        res.json(updateCategory);
+    
+    },
 };
 
 module.exports = categoryController;

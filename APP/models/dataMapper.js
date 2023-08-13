@@ -152,6 +152,25 @@ const dataMapper = {
         return result.rows[0];
 
     },
+
+
+    async updateOneSingleCategory(category) {
+        const preparedQuery = `
+            UPDATE "category"
+            SET 
+            "name" = $1,
+            "updated_at" = NOW()
+            WHERE "id" = $2 RETURNING *`;
+
+        const values = [
+            category.name,
+            category.id,
+        ];
+        
+        const result = await client.query(preparedQuery, values);
+
+        return result.rows[0];
+    },
 };
 
     
