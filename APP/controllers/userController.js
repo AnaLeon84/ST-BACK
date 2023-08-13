@@ -61,7 +61,7 @@ const userController = {
             // Le mot de passe sera celui qui aura été préalablement crypté et non celui d'origine
             // La variable 'result' qui stocke le résultat de la requête
 
-            //TODO
+            
             const result = await dataMapper.addUser({ 
                 name,
                 email,
@@ -69,7 +69,7 @@ const userController = {
                 description,
             });
             // Je retourne le 'result' créé dans la base de données
-            
+
             res.json(result);
            
         } catch (error){
@@ -81,11 +81,57 @@ const userController = {
     
     async updateOneUser(req, res) {
         const { id } = req.params;
-        const user = req.body;
+        const {
+            name, email, password, description,
+        } = req.body;
     
-        const updatedUser = await dataMapper.updateOneSingleUser({ ...user, id });
+        if (!emailValidator.validate(email)) {
 
-        res.json(updatedUser);
+            //Si ce n'est pas le cas j'envoie un message à l'utilisateur
+
+            return res.status(400).send({ error: 'Merci de renseigner un email valide' });
+        }
+
+         // Valider que tous les champs obligatoires soient présents
+         if ((!name || !email || !password)){
+            return res.status(400).json({ error: 'Merci de remplir tous les champs' });
+        }
+      
+        if (!emailValidator.validate(email)) {
+
+            //Si ce n'est pas le cas j'envoie un message à l'utilisateur
+
+            return res.status(400).send({ error: 'Merci de renseigner un email valide' });
+        }
+
+        // Je vérifie qu'un mot de passe est bien présent et qu'il fait au moins 12 caractères
+
+        if (password.length < 12) {
+
+            //Si la condition n'est pas remplie alors j'envoie un message à l'utilisateur
+
+            res.status(400).send({ message: 'Le mot de passe doit faire au moins 12 caractères' });
+            return;
+        }
+        
+        // Si tout est ok je crée un grain de sel selon les paramètres issus de notre fichier .env
+        
+        const saltRounds = parseInt(process.env.SALT_ROUNDS, 10);
+
+        // Je crée le cryptage du mot de passe avec la fonctoin 'hash' du module 'bcrypt'
+        // Je lui donne en argument le mot de passe de m'utilisateur et le grain de sel aléatoire.
+
+        const encryptedPassword  = await bcrypt.hash(password, saltRounds);
+
+        const result = await dataMapper.updateOneSingleUser({ 
+            name,
+            email,
+            password: encryptedPassword,
+            description,
+            id,
+        });
+
+        res.json(result);
     
     },
 

@@ -93,12 +93,12 @@ const dataMapper = {
             WHERE "id" = $5 RETURNING *`;
 
         const values = [
-            user.name,
-            user.email,
-            user.password,
-            user.description,
-            user.id,
-        ];
+            `${user.name}`,
+            `${user.email}`,
+            `${user.password}`,
+            `${user.description}`,
+            `${user.id}`,
+         ];
         
         const result = await client.query(preparedQuery, values);
 
