@@ -21,10 +21,7 @@ router.put('/users/:id', userController.updateOneUser); //mettre à jour un user
 
 router.delete('/users/:id', userController.deleteUser); //Supprimer un user
 router.get('/users/:id/my-story', userController.getAllUserStories);  //Récupérer toutes les histoires de l'utilisateur connecté 
-/*router.post('/user/:id/favorite', mainController); // Ajouter une histoire à la liste de favoris de l'utilisateur connecté 
-router.get('/user/:id/favorite', mainController); //Récupérer la liste des histoires favorites de l'utilisateur connecté 
-router.delete('/user/:id/favorite/:id', mainController); //Supprimer une histoire de la liste de favoris de l'utilisateur connecté 
-router.put('/user/:id/profil', mainController); // Mettre à jour le compte de l'utilisateur connecté (pseudo et mot de passe)*/ 
+router.put('/user/:id/profil', userController.updateUserProfile); // Mettre à jour le compte de l'utilisateur connecté (pseudo et mot de passe)*/ 
 
 //CATEGORY
 router.get('/categories', categoryController.getAllCategories); //Récupérer toutes les catégories*/
@@ -33,7 +30,11 @@ router.post('/categories', categoryController.postOneCategory); // Créer une no
 router.put('/categories/:id', categoryController.updateOneCategory);
 
 
+// FAVORIS
 
+/*router.post('/user/:id/favorite', mainController); // Ajouter une histoire à la liste de favoris de l'utilisateur connecté 
+router.get('/user/:id/favorite', mainController); //Récupérer la liste des histoires favorites de l'utilisateur connecté 
+router.delete('/user/:id/favorite/:id', mainController); //Supprimer une histoire de la liste de favoris de l'utilisateur connecté */
 
 
 module.exports = router;

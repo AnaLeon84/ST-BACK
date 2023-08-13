@@ -69,10 +69,10 @@ const dataMapper = {
         "password", "description")
         VALUES ($1, $2, $3, $4) RETURNING *`;
         const values = [
-            user.name,
-            user.email,
-            user.password,
-            user.description,
+            `${user.name}`,
+            `${user.email}`,
+            `${user.password}`,
+            `${user.description}`,
         ];
 
         const result = await client.query(preparedQuery, values);
@@ -171,6 +171,32 @@ const dataMapper = {
 
         return result.rows[0];
     },
+
+
+    async updateOneProfile(user) {
+        const preparedQuery = `
+            UPDATE "user"
+            SET 
+            "name" = $1, 
+            "email" = $2, 
+            "password" = $3, 
+            "description" = $4,
+            "updated_at" = NOW()
+            WHERE "id" = $5 RETURNING *`;
+
+        const values = [
+            user.name,
+            user.email,
+            user.password,
+            user.description,
+            user.id,
+        ];
+        
+        const result = await client.query(preparedQuery, values);
+
+        return result.rows[0];
+
+    }
 };
 
     
