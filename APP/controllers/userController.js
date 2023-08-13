@@ -14,13 +14,13 @@ const userController = {
         res.json(oneUser);
     },
 
-    //TODO: corriger
-    /*async postOneUser(req, res) {
+
+    async postOneUser(req, res) {
         try{
             const newUser = req.body; //récupérer l'user depuis le corps de la requête
             
             // Valider que tous les champs obligatoires soient présents
-            if ((!newUser.name || !newUser.email || !newUser.password || !newUser.description)){
+            if ((!newUser.name || !newUser.email || !newUser.password)){
                 return res.status(400).json({ error: 'Merci de remplir tous les champs' });
             }
           
@@ -33,7 +33,7 @@ const userController = {
     },
 
     //TODO: corriger
-    async updateOneUser(req, res) {
+    /*async updateOneUser(req, res) {
         try {
             const { id } = req.params;
             const user = req.body;
