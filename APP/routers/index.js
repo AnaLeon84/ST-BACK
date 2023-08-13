@@ -2,7 +2,7 @@ const express = require('express');
 
 const storyController = require('../controllers/storyController');
 const userController = require('../controllers/userController');
-//const categoryController = require('../controllers/categoryController.js');
+const categoryController = require('../controllers/categoryController.js');
 
 const router = express.Router();
 router.get('/stories', storyController.getAllStories);    //Récupérer toutes les histoires publiques 
@@ -29,8 +29,8 @@ router.delete('/user/:id/favorite/:id', mainController); //Supprimer une histoir
 router.put('/user/:id/profil', mainController); // Mettre à jour le compte de l'utilisateur connecté (pseudo et mot de passe)*/ 
 
 //CATEGORY
-/*router.get('/categories', categoryController.getAllCategories); //Récupérer toutes les catégories*/
-
+router.get('/categories', categoryController.getAllCategories); //Récupérer toutes les catégories*/
+router.get('/categories/:id', categoryController.getOneCategory);// Récupérer une catégorie
 
 
 module.exports = router;

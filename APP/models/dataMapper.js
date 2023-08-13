@@ -125,8 +125,25 @@ const dataMapper = {
         const result = await client.query(preparedQuery, values);
 
         return result.rows;
-    }
+    },
 
+
+    // --------------------------CATEGORIES--------------------------------------
+
+    async getAllPublicCategories() {
+        const preparedQuery = 'SELECT * FROM "category"';
+        const result = await client.query(preparedQuery);
+        return result.rows;
+
+    },
+    
+    async getOneSingleCategory(id) {
+        const preparedQuery = 'SELECT * FROM "category" WHERE id = $1';
+        const values = [`${id}`];
+        const result = await client.query(preparedQuery, values);
+        return result.rows[0];
+
+    },
 };
 
     
