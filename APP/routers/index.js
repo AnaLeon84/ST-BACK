@@ -7,6 +7,11 @@ const authController = require('../controllers/authController.js');
 
 const isLogged = require('../middlewares/isLogged');
 
+const validate = require('../validation/validate');
+const { post: authPostSchema } = require('../validation/schema/auth.schema');
+
+const { post: userPostSchema, put: userPutSchema } = require('../validation/schema/user.schema');
+
 const router = express.Router();
 router.get('/stories', storyController.getAllStories);    //Récupérer toutes les histoires publiques 
 router.get('/stories/:id', storyController.getOneStory);  // Récupérer une histoire spécifique 
@@ -18,8 +23,8 @@ router.delete('/stories/:id', isLogged, storyController.deleteStory);// Supprime
 //USER
 router.get('/users', userController.getAllUsers); //Récupérer tous les utilisateurs
 router.get('/users/:id', userController.getOneUser); //Récupérer un utilisateur
-router.post('/users', userController.postOneUser); //Créer un nouveau utilisateur
-router.put('/users/:id', isLogged, userController.updateOneUser); //mettre à jour un user
+router.post('/users', validate(userPostSchema, 'body'), userController.postOneUser); //Créer un nouveau utilisateur
+router.put('/users/:id', isLogged, validate(userPutSchema, 'body'), userController.updateOneUser); //mettre à jour un user
 
 
 router.delete('/users/:id', isLogged, userController.deleteUser); //Supprimer un user
@@ -35,7 +40,8 @@ router.put('/categories/:id', isLogged, categoryController.updateOneCategory);
 
 //AUTHENTICATION
 
-router.post('/auth', authController.login);
+router.post('/auth', validate(authPostSchema, 'body'), authController.login);
+
 
 
 // FAVORIS
