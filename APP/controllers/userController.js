@@ -148,14 +148,14 @@ const userController = {
         res.json(oneUser);
     },
 
-    async updateUserProfile(req, res) {
+    /*async updateUserProfile(req, res) {
         const { id } = req.params;
         const user = req.body;
 
         const updateProfile = await dataMapper.updateOneProfile({ ...user, id });
 
         res.json(updateProfile);
-    }
+    }*/
         
     
 };

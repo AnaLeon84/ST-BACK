@@ -171,9 +171,19 @@ const dataMapper = {
 
         return result.rows[0];
     },
+    
+        // AUTHENTICATION
 
+        async getOneUserByEmail(email) {
+            const preparedQuery = 'SELECT * FROM "user" WHERE "email" = $1';
+        
+            const values = [email];
+        
+            const result = await client.query(preparedQuery, values);
+            return result.rows[0];
+          },
 
-    async updateOneProfile(user) {
+    /*async updateOneProfile(user) {
         const preparedQuery = `
             UPDATE "user"
             SET 
@@ -196,7 +206,7 @@ const dataMapper = {
 
         return result.rows[0];
 
-    }
+    }*/
 };
 
     
