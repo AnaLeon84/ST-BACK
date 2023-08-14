@@ -6,41 +6,42 @@ const categoryController = require('../controllers/categoryController.js');
 const authController = require('../controllers/authController.js');
 
 const isLogged = require('../middlewares/isLogged');
-
+const controllerHandler = require('../controllers/helpers/controllerHandler');
 const validate = require('../validation/validate');
 const { post: authPostSchema } = require('../validation/schema/auth.schema');
+
 
 const { post: userPostSchema, put: userPutSchema } = require('../validation/schema/user.schema');
 
 const router = express.Router();
-router.get('/stories', storyController.getAllStories);    //Récupérer toutes les histoires publiques 
-router.get('/stories/:id', storyController.getOneStory);  // Récupérer une histoire spécifique 
-router.post('/stories', isLogged, storyController.postOneStory);   //Créer une nouvelle histoire 
-router.put('/stories/:id', isLogged, storyController.updateOneStory); // Mettre à jour une histoire existante 
-router.delete('/stories/:id', isLogged, storyController.deleteStory);// Supprimer une histoire 
+router.get('/stories', controllerHandler(storyController.getAllStories));    //Récupérer toutes les histoires publiques 
+router.get('/stories/:id', controllerHandler(storyController.getOneStory));  // Récupérer une histoire spécifique 
+router.post('/stories', isLogged, controllerHandler(storyController.postOneStory));   //Créer une nouvelle histoire 
+router.put('/stories/:id', isLogged, controllerHandler(storyController.updateOneStory)); // Mettre à jour une histoire existante 
+router.delete('/stories/:id', isLogged, controllerHandler(storyController.deleteStory));// Supprimer une histoire 
 
 
 //USER
-router.get('/users', userController.getAllUsers); //Récupérer tous les utilisateurs
+router.get('/users', controllerHandler(userController.getAllUsers)); //Récupérer tous les utilisateurs
 router.get('/users/:id', userController.getOneUser); //Récupérer un utilisateur
-router.post('/users', validate(userPostSchema, 'body'), userController.postOneUser); //Créer un nouveau utilisateur
-router.put('/users/:id', isLogged, validate(userPutSchema, 'body'), userController.updateOneUser); //mettre à jour un user
+router.post('/users', validate(userPostSchema, 'body'), controllerHandler(userController.postOneUser)); //Créer un nouveau utilisateur
+router.put('/users/:id', isLogged, validate(userPutSchema, 'body'), controllerHandler(userController.updateOneUser)); //mettre à jour un user
 
 
-router.delete('/users/:id', isLogged, userController.deleteUser); //Supprimer un user
-router.get('/users/:id/my-story', isLogged, userController.getAllUserStories);  //Récupérer toutes les histoires de l'utilisateur connecté 
+router.delete('/users/:id', isLogged, controllerHandler(userController.deleteUser)); //Supprimer un user
+router.get('/users/:id/my-story', isLogged, controllerHandler(userController.getAllUserStories));  //Récupérer toutes les histoires de l'utilisateur connecté 
 /*router.put('/user/:id/profil', userController.updateUserProfile); // Mettre à jour le compte de l'utilisateur connecté (pseudo et mot de passe)*/ 
 
 //CATEGORY
-router.get('/categories', categoryController.getAllCategories); //Récupérer toutes les catégories*/
-router.get('/categories/:id', categoryController.getOneCategory);// Récupérer une catégorie
-router.post('/categories', isLogged, categoryController.postOneCategory); // Créer une nouvelle catégorie
-router.put('/categories/:id', isLogged, categoryController.updateOneCategory);
+router.get('/categories', controllerHandler(categoryController.getAllCategories)); //Récupérer toutes les catégories*/
+router.get('/categories/:id', controllerHandler(categoryController.getOneCategory));// Récupérer une catégorie
+router.post('/categories', isLogged, controllerHandler(categoryController.postOneCategory)); // Créer une nouvelle catégorie
+router.put('/categories/:id', isLogged, controllerHandler(categoryController.updateOneCategory));
 
 
 //AUTHENTICATION
 
-router.post('/auth', validate(authPostSchema, 'body'), authController.login);
+router.post('/auth', validate(authPostSchema, 'body'), controllerHandler(authController.login));
 
 
 
